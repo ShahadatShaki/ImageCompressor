@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.acoder.imagecompressor.ModelClass.UserProfile
 import com.acoder.imagecompressor.R
-import com.acoder.imagecompressor.Utility.Constants
 import com.acoder.imagecompressor.databinding.ListUserBinding
 import com.acoder.imagecompressor.intarface.ClickListener
 import java.util.*
@@ -20,13 +18,17 @@ import java.util.*
  * 01685558803
  * shahadat.shaki03@gmail.com
  */
-class ImageAdapter(private val context: Context, private var dataList: ArrayList<Uri>, private val clickListener: ClickListener) : RecyclerView.Adapter<ImageAdapter.ViewFilesHolder>() {
+class ImageAdapter(
+    private val context: Context,
+    private var dataList: ArrayList<Uri>,
+    private val clickListener: ClickListener
+) : RecyclerView.Adapter<ImageAdapter.ViewFilesHolder>() {
     private var layoutInflater: LayoutInflater?
 
 
     init {
         layoutInflater = context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     }
 
 
@@ -36,7 +38,7 @@ class ImageAdapter(private val context: Context, private var dataList: ArrayList
     }
 
     fun getData(): ArrayList<Uri> {
-        return  dataList
+        return dataList
     }
 
 
@@ -45,7 +47,8 @@ class ImageAdapter(private val context: Context, private var dataList: ArrayList
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.context)
         }
-        val binding: ListUserBinding = DataBindingUtil.inflate(layoutInflater!!, R.layout.list_user, parent, false)
+        val binding: ListUserBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.list_user, parent, false)
         return ViewFilesHolder(binding)
     }
 
@@ -76,7 +79,8 @@ class ImageAdapter(private val context: Context, private var dataList: ArrayList
     }
 
 
-    inner class ViewFilesHolder(val binding: ListUserBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewFilesHolder(val binding: ListUserBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
 
 }

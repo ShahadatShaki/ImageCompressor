@@ -7,7 +7,6 @@ import android.os.Handler;
 
 import com.acoder.imagecompressor.Base.BaseActivity;
 import com.acoder.imagecompressor.R;
-import com.acoder.imagecompressor.Utility.SharedPreferencesEnum;
 import com.acoder.imagecompressor.databinding.ActivitySplashBinding;
 
 /**
@@ -22,13 +21,6 @@ public class SplashActivity extends BaseActivity {
     Context context;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_splash);
-
-        context = this;
-    }
 
     @Override
     protected int getLayoutResourceFile() {
@@ -37,25 +29,13 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initComponent() {
+        context = this;
 
         binding =  getBinding();
 
-        new Handler().postDelayed(new Runnable() {
+        startActivity(new Intent(context, HomePage.class));
+        finish();
 
-            @Override
-            public void run() {
-                // startActvity(SplashActivity.this, MainActivity.class, true);
-                if (SharedPreferencesEnum.getBoolean(SharedPreferencesEnum.Key.IS_LOGIN)) {
-                    // startActvity(SplashActivity.this, MainActivity.class, true);
-                    startActivity(new Intent(context, HomePage.class));
-                    finish();
-                } else {
-//                     startActvity(SplashActivity.this, SignInActivity.class, true);
-                    startActivity(new Intent(SplashActivity.this, HomePage.class));
-                    finish();
-                }
-            }
-        }, 1000);
     }
 
 

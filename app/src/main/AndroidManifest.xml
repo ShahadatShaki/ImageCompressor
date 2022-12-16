@@ -17,11 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.acoder.imagecompressor.Activity.HomePage" />
-        <activity android:name="com.acoder.imagecompressor.Activity.LoginActivity">
 
-        </activity>
-        <activity android:name="com.acoder.imagecompressor.Activity.WebViewActivity" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7561862763629949~7284023291"/>
+
+        <activity android:name="com.acoder.imagecompressor.Activity.HomePage" />
+
         <activity
             android:name="com.acoder.imagecompressor.Activity.SplashActivity"
             android:exported="true">

@@ -31,11 +31,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.acoder.imagecompressor.R;
-import com.acoder.imagecompressor.ViewModel.UserControlViewModel;
-import com.acoder.imagecompressor.databinding.NoItemLayoutBinding;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -49,26 +46,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public Context context;
     LinearLayout shimmerFrameLayout;
-    UserControlViewModel viewModel;
     boolean appVersionDialogViewing = false;
     private ProgressDialog progressDialog;
     private Activity mActivity;
     private View loadingView, noDataView;
 
-    public static void checkEmptyData(int size, NoItemLayoutBinding b) {
-        if (size == 0) {
-            b.mainLayout.setVisibility(View.VISIBLE);
-        } else {
-            b.mainLayout.setVisibility(View.GONE);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         context = this;
-        viewModel = ViewModelProviders.of(this).get(UserControlViewModel.class);
 
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         getWindow().setExitTransition(new Explode());

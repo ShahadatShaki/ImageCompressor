@@ -12,6 +12,11 @@ import com.acoder.imagecompressor.Adapter.ImageAdapter
 import com.acoder.imagecompressor.Base.BaseActivity
 import com.acoder.imagecompressor.R
 import com.acoder.imagecompressor.databinding.ActivityHomePageBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -51,11 +56,32 @@ class HomePage : BaseActivity() {
         }
 
         b.saveOnStorage.setOnClickListener {
+            showFullScreenAd()
             storeInStorage()
         }
 
         initRecycleView()
 
+        loadAds()
+
+    }
+
+    private fun showFullScreenAd() {
+        var adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(this,getString(R.string.full_screen_ad_unit_id), adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+            }
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                interstitialAd.show(activity)
+            }
+        })
+    }
+
+    private fun loadAds() {
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        b.adView.loadAd(adRequest)
     }
 
     var compressedImageSize: Double = 0.0
@@ -72,7 +98,7 @@ class HomePage : BaseActivity() {
                     resolution(1280, 720)
                     quality(b.compressQuality.progress)
                 }
-                Log.d("compressImages", "compressImages: " + file.length())
+
                 compressedImageSize += file.length() / 1024
                 compressFiles.add(file)
                 compressed++
@@ -80,11 +106,9 @@ class HomePage : BaseActivity() {
                 if (compressed == imageList.size) {
                     withContext(Dispatchers.Main) {
                         compressedImageSize /= 1024
-                        compressedImageSize =
-                            compressedImageSize.toBigDecimal().setScale(1, RoundingMode.UP)
-                                .toDouble()
+                        compressedImageSize = compressedImageSize.toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
 
-                        b.info.text = "Total selected image: ${imageList.size} and Total size: ${size} MB\n" +
+                        b.info.text = "Total selected image: ${imageList.size} and Total size: $size MB\n" +
                                 "Total Size after compression: $compressedImageSize MB"
 
                         Toast.makeText(

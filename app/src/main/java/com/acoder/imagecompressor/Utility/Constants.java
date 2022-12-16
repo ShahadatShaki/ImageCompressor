@@ -1,5 +1,7 @@
 package com.acoder.imagecompressor.Utility;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,10 +10,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
-import com.github.chrisbanes.photoview.PhotoView;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +17,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.acoder.imagecompressor.R;
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.snackbar.Snackbar;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by SHAKI on 30-Dec-17.
@@ -35,15 +32,10 @@ public class Constants {
     public static final String UPDATE_FILE = "UPDATE_FILE";
     public static final String SETTINGS = "SETTINGS";
     public static String ALL_FILE = "All_file";
-
-
+    public static boolean dataArrived;
+    static String sharedPreferencesFile = "sharedPreferencesFile";
     private static ProgressDialog progressDialog;
     private static Dialog dialog;
-    public static boolean dataArrived;
-
-
-    static String sharedPreferencesFile = "sharedPreferencesFile";
-
 
     private static SharedPreferences getPref(Context context) {
 
@@ -182,26 +174,6 @@ public class Constants {
         }
     }
 
-    public static void loadImageSqure(ImageView imageView, String url, int cornerRadius, int borderRadius) {
-        try {
-            Transformation transformation = new RoundedTransformationBuilder()
-                    .borderColor(Color.WHITE)
-                    .borderWidthDp(borderRadius)
-                    .cornerRadiusDp(cornerRadius)
-                    .oval(false)
-                    .build();
-
-            Picasso.get()
-                    .load(url)
-                    .placeholder(R.drawable.round_shape_5dp_corner_light_aysh)
-                    .error(R.drawable.round_shape_5dp_corner_light_aysh)
-                    .transform(transformation)
-                    .resize(800, 800)
-                    .centerCrop()
-                    .into(imageView);
-        } catch (Exception e) {
-        }
-    }
 
     public static void showSuccessToast(Context context, String txt) {
         FancyToast.makeText(context, "" + txt, FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();

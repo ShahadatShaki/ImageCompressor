@@ -18,7 +18,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.acoder.imagecompressor.databinding.NoItemLayoutBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.fragment.app.Fragment;
@@ -185,13 +184,6 @@ public abstract class BaseFragment extends Fragment {
         FancyToast.makeText(context, "" + txt, FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
     }
 
-    public static void checkEmptyData(int size, NoItemLayoutBinding b) {
-        if (size == 0) {
-            b.mainLayout.setVisibility(View.VISIBLE);
-        } else {
-            b.mainLayout.setVisibility(View.GONE);
-        }
-    }
 
 
 }

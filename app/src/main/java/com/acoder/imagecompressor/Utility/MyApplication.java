@@ -12,9 +12,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SharedPreferencesEnum.initSharedPref(getApplicationContext());
-        ApiClient.initRetrofit();
-        OfflineCache.initOfflineCache(getApplicationContext());
     }
 
 
